@@ -27,8 +27,10 @@ app.get('/director/movies', (req, res) => {
       onCompleted: function () {
         // Completed!
         session.close();
-        const moviesJson = JSON.stringify(movies);
-        res.status(200).send(moviesJson);
+        const moviesSet = new Set(movies);
+        movies = [...moviesSet];
+        const moviesString = movies.join('\n');
+        res.status(200).send(moviesString);
       },
       onError: function (error) {
         console.log(error);
@@ -50,8 +52,10 @@ app.get('/movie/actors', (req, res) => {
       onCompleted: function () {
         // Completed!
         session.close();
-        const actorsJson = JSON.stringify(actors);
-        res.status(200).send(actorsJson);
+        const actorsSet = new Set(actors);
+        actor = [...actorsSet];
+        const actorsString = actors.join('\n');
+        res.status(200).send(actorsString);
       },
       onError: function (error) {
         console.log(error);
